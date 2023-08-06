@@ -1,9 +1,10 @@
 "use client";
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
+import { Mesh } from "three";
 
 export default function MovingPlane() {
-  const mesh = useRef(null);
+  const mesh = useRef<Mesh>(null!);
 
   const fragmentShader = `
   uniform float u_time;
