@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function Reveal({ children, delay }: Props) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   const controls = useAnimation();
