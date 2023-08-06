@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Mesh } from "three";
+import { Mesh, ShaderMaterial } from "three";
 
 export default function MovingPlane() {
   const mesh = useRef<Mesh>(null);
