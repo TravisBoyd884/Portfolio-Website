@@ -4,7 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import { Mesh } from "three";
 
 export default function MovingPlane() {
-  const mesh = useRef<Mesh>(null!);
+  const mesh = useRef<Mesh>(null);
+  const shaderMaterialRef = useRef<ShaderMaterial>(null);
 
   const fragmentShader = `
   uniform float u_time;
@@ -45,7 +46,8 @@ export default function MovingPlane() {
 
   useFrame((state) => {
     const { clock } = state;
-      mesh.current!.material.uniforms.u_time.value = clock.getElapsedTime();
+    shaderMaterialRef.current!.material.uniforms.u_time.value =
+      clock.getElapsedTime();
   });
 
   return (
@@ -57,6 +59,7 @@ export default function MovingPlane() {
     >
       <planeGeometry args={[1, 1, 32, 32]} />
       <shaderMaterial
+        ref={shaderMaterialRef}
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
         uniforms={uniforms}
