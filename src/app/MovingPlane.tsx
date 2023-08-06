@@ -46,8 +46,7 @@ export default function MovingPlane() {
 
   useFrame((state) => {
     const { clock } = state;
-    shaderMaterialRef.current!.material.uniforms.u_time.value =
-      clock.getElapsedTime();
+    shaderMaterialRef.current!.uniforms.u_time.value = clock.getElapsedTime();
   });
 
   return (
