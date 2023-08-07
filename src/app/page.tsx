@@ -11,7 +11,7 @@ import Anim from "./Anim";
 export default function Home() {
   const [next, setnext] = useState(0);
 
-  const animations = [<FBOCurl />, <MovingPlane />, <Anim />];
+  const animations = [<FBOCurl />, <MovingPlane />];
 
   const handleClick = () => {
     if (next == animations.length - 1) setnext(0);
