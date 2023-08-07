@@ -1,49 +1,44 @@
 "use client";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import React, { useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import MovingPlane from "./MovingPlane";
 import FBOCurl from "./FBOCurl";
 import Reveal from "./Reveal";
-
-function CheckerBoard() {
-  const vertexShader = `
-    void main() {
-      gl_Position = vec4( position, 1.0 );
-    }
-  `;
-  const fragmentShader = `
-    uniform vec2 u_resolution;
-
-    void main(){
-      vec2 st = gl_FragCoord.xy/u-resolution;
-      float color = mod(floor(2.0 * st.x) + floor(2.0 * st.y), 2.0);
-      gl_FragColor = vec4(color,color,color,1.0);
-    }
-  `;
-
-  return (
-    <mesh>
-      <planeGeometry />
-      <shaderMaterial
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-      />
-    </mesh>
-  );
-}
+import SkyBox from "./SkyBox";
+import Anim from "./Anim";
 
 export default function Home() {
+  const [next, setnext] = useState(0);
+
+  const animations = [<FBOCurl />, <MovingPlane />, <Anim />];
+
+  const handleClick = () => {
+    if (next == animations.length - 1) setnext(0);
+    else setnext(next + 1);
+  };
+
+  useEffect(() => {
+    console.log(next);
+  }, [next]);
+
   return (
     <div className="h-screen w-screen bg-black overflow-hidden">
-      <div className="absolute h-screen w-2/3 left-80">
+      <div className="absolute h-screen w-screen z-0">
         <Canvas camera={{ position: [0, 0, 3] }}>
-          <CheckerBoard />
           <OrbitControls />
-          <FBOCurl />
-          <axesHelper />
+          {animations[next]}
+          <SkyBox />
         </Canvas>
       </div>
+
+      <button
+        type="button"
+        onClick={handleClick}
+        className="absolute w-48 h-20 bg-white text-black z-50 text-3xl left-1/2 -translate-x-1/2 top-10"
+      >
+        Next
+      </button>
 
       {/* <div className="absolute text-white font-mono font-bold text-6xl top-1/3 left-20"> */}
       {/*   <Reveal delay={0.5}> */}
