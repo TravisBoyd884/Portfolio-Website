@@ -18,10 +18,6 @@ export default function Home() {
     else setnext(next + 1);
   };
 
-  useEffect(() => {
-    console.log(next);
-  }, [next]);
-
   return (
     <div className="h-screen w-screen bg-black overflow-hidden">
       <div className="absolute h-screen w-screen z-0">

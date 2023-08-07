@@ -38,7 +38,7 @@ export default function Points() {
   useFrame(() => {
     t += 15;
 
-    const positions = bufferRef.current!.array;
+    const positions = bufferRef.current.array;
 
     let i = 0;
     for (let xi = 0; xi < count; xi++) {
@@ -51,7 +51,7 @@ export default function Points() {
       }
     }
 
-    bufferRef.current!.needsUpdate = true;
+    bufferRef.current.needsUpdate = true;
   });
 
   return (
