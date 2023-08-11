@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
-export default function projects() {
+export default function Projects() {
   const count = 100;
   const sep = 5;
 
