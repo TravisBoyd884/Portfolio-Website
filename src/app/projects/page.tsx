@@ -7,7 +7,7 @@ export default function projects() {
   const count = 100;
   const sep = 5;
 
-  let positions = useMemo(() => {
+  let Positions = useMemo(() => {
     let positions = [];
 
     for (let i = 0; i < count; i++) {
@@ -30,8 +30,8 @@ export default function projects() {
               <sphereGeometry />
               <bufferAttribute
                 attach="attributes-position"
-                array={positions}
-                count={positions.length / 3}
+                array={Positions}
+                count={Positions.length / 3}
                 itemSize={3}
               />
             </bufferGeometry>
