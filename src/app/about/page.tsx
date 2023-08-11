@@ -78,8 +78,8 @@ function MeshAnim(props: MyComponentProps) {
   }, [props.grid.width, props.grid.height]);
 
   //animation
-  let posRef = useRef(),
-    colorRef = useRef();
+  let posRef = useRef<any>(),
+    colorRef = useRef<any>();
 
   useFrame(() => {
     t = props.anim.update(t);
