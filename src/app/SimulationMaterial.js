@@ -11,17 +11,14 @@ const getRandomData = (width, height) => {
   for (let i = 0; i < length; i++) {
     const stride = i * 4;
 
-    const distance = Math.sqrt(Math.random()) * 2.0;
-    const theta = THREE.MathUtils.randFloatSpread(360);
-    const phi = THREE.MathUtils.randFloatSpread(360);
+    const distance = Math.random() * 2.0;
+    const theta = THREE.MathUtils.randFloatSpread(720);
+    const phi = THREE.MathUtils.randFloatSpread(720);
 
-    data[stride] = distance * Math.sin(theta) * Math.cos(phi);
-    data[stride + 1] = distance * Math.sin(theta) * Math.sin(phi);
+    data[stride] = distance * Math.sin(theta) * Math.tan(phi);
+    data[stride + 1] = distance * Math.sin(theta) * Math.cos(phi);
     data[stride + 2] = distance * Math.cos(theta);
-    /* data[stride] = distance * Math.random(); */
-    /* data[stride + 1] = distance * Math.random(); */
-    /* data[stride + 2] = distance * Math.cos(theta); */
-    data[stride + 3] = 1.0; // this value will not have any impact
+    data[stride + 3] = 255;
   }
 
   return data;

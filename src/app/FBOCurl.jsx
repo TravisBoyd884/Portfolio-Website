@@ -1,6 +1,6 @@
-import { OrbitControls, useFBO } from "@react-three/drei";
-import { Canvas, useFrame, extend, createPortal } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { useFBO } from "@react-three/drei";
+import { useFrame, extend, createPortal } from "@react-three/fiber";
+import { useMemo, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
 
 import SimulationMaterial from "./SimulationMaterial";
@@ -11,7 +11,26 @@ import fragmentShader from "./fragmentShader";
 extend({ SimulationMaterial });
 
 export default function FBOParticles() {
-  const size = 280;
+  /* const hover = useRef(false); */
+  let mousePos = {};
+
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      mousePos = { x: event.clientX, y: event.clientY };
+      console.log(
+        mousePos.x / window.innerWidth,
+        mousePos.y / window.innerHeight
+      );
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  const size = 350;
 
   const points = useRef();
   const simulationMaterialRef = useRef();
@@ -57,6 +76,15 @@ export default function FBOParticles() {
       u_time: {
         value: 0.0,
       },
+      uMousPosX: {
+        value: mousePos.x,
+      },
+      uMousPosY: {
+        value: mousePos.y,
+      },
+      u_intensity: {
+        value: 0.0,
+      },
     }),
     []
   );
@@ -70,10 +98,16 @@ export default function FBOParticles() {
     gl.setRenderTarget(null);
 
     points.current.material.uniforms.uPositions.value = renderTarget.texture;
-    points.current.rotation.y += 0.005;
+    points.current.rotation.y += 0.001;
 
     simulationMaterialRef.current.uniforms.uTime.value = clock.elapsedTime;
     points.current.material.uniforms.u_time.value = clock.elapsedTime;
+
+    /* points.current.material.uniforms.u_intensity.value = MathUtils.lerp( */
+    /*   points.current.material.uniforms.u_intensity.value, */
+    /*   hover.current ? 1.0 : 0.0, */
+    /*   0.02 */
+    /* ); */
   });
 
   return (
@@ -98,7 +132,11 @@ export default function FBOParticles() {
         </mesh>,
         scene
       )}
-      <points ref={points}>
+      <points
+        ref={points}
+        /* onPointerOver={() => (hover.current = true)} */
+        /* onPointerOut={() => (hover.current = false)} */
+      >
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
