@@ -84,8 +84,8 @@ function MeshAnim(props: MyComponentProps) {
   useFrame(() => {
     t = props.anim.update(t);
 
-    const positions = posRef.current.array,
-      colors = colorRef.current.array;
+    const positions = posRef.current!.array,
+      colors = colorRef.current!.array;
 
     let i = 0;
     for (let yi = 0; yi < props.grid.height; yi++) {
