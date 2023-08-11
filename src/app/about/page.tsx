@@ -150,7 +150,7 @@ export default function about() {
   const seed = Math.floor(Math.random() * Math.pow(2, 16));
   noise.seed(seed);
 
-  const sampleNoise = (x, y, z) => {
+  const sampleNoise = (x: any, y: any, z: any) => {
     let scale = 1 / 8;
     let octaves = 20;
     let persistence = 0.6;
@@ -168,11 +168,11 @@ export default function about() {
     return value;
   };
 
-  const zOfXYZT = (x, y, t) => {
+  const zOfXYZT = (x: any, y: any, t: any) => {
     return sampleNoise(x, y, t);
   };
 
-  const colorOfXYZT = (x, y, z, t) => {
+  const colorOfXYZT = (x: any, y: any, z: any, t: any) => {
     let rVal = 0.3;
     /* if (z > 0) rVal = 1; */
     /* else rVal = 0; */
