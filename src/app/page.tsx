@@ -59,7 +59,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="text-xl font-bold text-gray-400">
-                I'm a 19 year old sophomore at Oakland University, deeply
+                I&apos;m a 19 year old sophomore at Oakland University, deeply
                 engrossed in the world of computer science. My insatiable
                 curiosity has led me to explore the captivating domains of web
                 development, artificial intelligence, and computer graphics.
