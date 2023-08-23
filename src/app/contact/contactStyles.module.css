@@ -1,0 +1,41 @@
+.parallax {
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.parallaxLayer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.parallaxLayerBase {
+  transform: translateZ(0);
+  position: absolute;
+  top: 100vh;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background-color: blue;
+  /* opacity: 0.5; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.parallaxLayerBack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateZ(-1px) scale(2);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: red;
+  z-index: 0;
+}

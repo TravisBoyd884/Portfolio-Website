@@ -1,0 +1,64 @@
+.glow {
+  width: fit;
+  height: fit;
+  background: transparent;
+  color: #b4b4b4;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  margin: 2rem;
+}
+
+.glow:hover {
+  color: white;
+}
+
+.parallax {
+  perspective: 1px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.parallaxLayerBack {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: black;
+  transform: translateZ(-2px) scale(3);
+}
+
+//For PC
+@media screen and (min-width: 720px) {
+  .parallaxLayerBack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-color: black;
+    max-height: 100vh;
+    transform: translateZ(-5px) scale(6);
+  }
+}
+
+.parallaxLayerBase {
+  transform: translateZ(0);
+  position: absolute;
+  top: 100vh;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  gap: 4rem;
+}

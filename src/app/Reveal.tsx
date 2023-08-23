@@ -4,9 +4,10 @@ import { motion, useInView, useAnimation } from "framer-motion";
 interface Props {
   children: JSX.Element;
   delay: number;
+  inView: boolean;
 }
 
-export default function Reveal({ children, delay }: Props) {
+export default function Reveal({ children, delay, inView }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
@@ -26,7 +27,7 @@ export default function Reveal({ children, delay }: Props) {
           shown: { opacity: 1, y: 0 },
         }}
         initial="hidden"
-        animate={controls}
+        animate={inView ? controls : "shown"}
         transition={{ duration: 1.5, delay: delay }}
       >
         {children}
