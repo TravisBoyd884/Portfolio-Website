@@ -11,7 +11,6 @@ export default function Project(props: { imagepath: string }) {
         width={250}
         height={250}
       />
-      {/* <div className="relative w-full h-full blur-sm"></div> */}
     </div>
   );
 }
