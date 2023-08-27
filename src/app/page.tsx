@@ -79,10 +79,10 @@ export default function Home() {
       </div>
 
       {aboutActive ? (
-        <div className="fixed w-screen h-screen z-50 p-8">
+        <div className="fixed w-screen h-screen z-50">
           <button
             type="button"
-            className="absolute p-2 md:p-8 text-white text-3xl z-[60] cursor-pointer font-mono"
+            className="absolute p-2 md:p-8 text-white text-xl md:text-3xl z-[60] cursor-pointer font-mono"
             onClick={() => handleClick()}
           >
             Back
