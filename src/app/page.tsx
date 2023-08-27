@@ -82,7 +82,7 @@ export default function Home() {
         <div className="fixed w-screen h-screen z-50 p-8">
           <button
             type="button"
-            className="absolute p-8 text-white text-3xl z-[60] cursor-pointer font-mono"
+            className="absolute p-2 md:p-8 text-white text-3xl z-[60] cursor-pointer font-mono"
             onClick={() => handleClick()}
           >
             Back
