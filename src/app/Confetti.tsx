@@ -1,20 +1,22 @@
+"use client";
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
-import type { Container, Engine, ISourceOptions } from "tsparticles-engine";
+import type { Engine, ISourceOptions } from "tsparticles-engine";
 import { loadFull } from "tsparticles";
-import particlesConfig from "./particles-config";
+import confettiConfig from "./particles-config";
 
-export default function App() {
+export default function Confetti() {
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadFull(engine);
   }, []);
 
   return (
-    <Particles
-      id="tsparticles"
-      options={particlesConfig as ISourceOptions}
-      init={particlesInit}
-      className=""
-    />
+    <>
+      <Particles
+        id="tsparticles"
+        options={confettiConfig as ISourceOptions}
+        init={particlesInit}
+      />
+    </>
   );
 }

@@ -682,4 +682,5 @@ const confettiConfig = {
     },
   },
 };
+
 export default confettiConfig;

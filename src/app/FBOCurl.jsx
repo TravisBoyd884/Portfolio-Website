@@ -11,16 +11,11 @@ import fragmentShader from "./fragmentShader";
 extend({ SimulationMaterial });
 
 export default function FBOParticles() {
-  /* const hover = useRef(false); */
   let mousePos = {};
 
   useEffect(() => {
     const handleMouseMove = (event) => {
       mousePos = { x: event.clientX, y: event.clientY };
-      console.log(
-        mousePos.x / window.innerWidth,
-        mousePos.y / window.innerHeight
-      );
     };
 
     window.addEventListener("mousemove", handleMouseMove);

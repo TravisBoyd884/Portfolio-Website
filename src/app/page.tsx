@@ -1,9 +1,9 @@
 "use client";
+
 import styles from "./home.module.scss";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import MovingPlane from "./MovingPlane";
+import React, { useEffect, useRef, useState } from "react";
 import FBOCurl from "./FBOCurl";
 import Reveal from "./Reveal";
 import Link from "next/link";
@@ -14,6 +14,41 @@ import Confetti from "./Confetti";
 
 export default function Home() {
   const [aboutActive, setaboutActive] = useState(false);
+  const [projectActive, setprojectActive] = useState(false);
+  const projectSection = useRef<HTMLDivElement>(null);
+  const homeSection = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Add scroll event listener when the component mounts
+    window.addEventListener("wheel", (event) => {
+      if (event.deltaY > 0) {
+        setprojectActive(true);
+      } else {
+        setprojectActive(false);
+      }
+    });
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.addEventListener("wheel", (event) => {
+        if (event.deltaY > 0) {
+          setprojectActive(true);
+        } else {
+          setprojectActive(false);
+        }
+      });
+    };
+  }, []);
+
+  const handleClick = () => {
+    setaboutActive(false);
+  };
+
+  const handleProjectButton = () => {
+    projectSection.current?.scrollIntoView();
+    setprojectActive(!projectActive);
+  };
+
   return (
     <>
       {/*NavBar  */}
@@ -28,23 +63,27 @@ export default function Home() {
           </button>
         </Reveal>
         <Reveal delay={0.5} inView={false}>
-          <Link href="/projects" className={styles.glow}>
+          <button onClick={() => handleProjectButton()} className={styles.glow}>
             Projects
-          </Link>
+          </button>
         </Reveal>
         <Reveal delay={0.5} inView={false}>
-          <Link href="/contact" className={styles.glow}>
+          <a
+            href="mailto:phtboyd884@gmail.com"
+            target="_blank"
+            className={styles.glow}
+          >
             Contact
-          </Link>
+          </a>
         </Reveal>
       </div>
 
       {aboutActive ? (
-        <div className="fixed w-screen h-screen z-50">
+        <div className="fixed w-screen h-screen z-50 p-8">
           <button
             type="button"
             className="absolute p-8 text-white text-3xl z-[60] cursor-pointer font-mono"
-            onClick={() => setaboutActive(false)}
+            onClick={() => handleClick()}
           >
             Back
           </button>
@@ -81,7 +120,7 @@ export default function Home() {
       <div className={styles.parallax}>
         {/*Background*/}
         <div className={styles.parallaxLayerBack}>
-          <div className="w-screen h-screen">
+          <div ref={homeSection} className="w-screen h-screen">
             <Canvas camera={{ position: [0, 0, 1] }} resize={{ scroll: false }}>
               <OrbitControls enableZoom={false} />
               <FBOCurl />
@@ -105,14 +144,23 @@ export default function Home() {
         </div>
 
         <div className={styles.parallaxLayerBase}>
-          <h1 className="text-white text-3xl md:text-6xl font-mono">
+          <h1
+            ref={projectSection}
+            className="text-white text-3xl md:text-6xl font-mono p-16 md:p-32"
+          >
             Projects
           </h1>
-          <Confetti />
+
+          {projectActive ? (
+            <Confetti />
+          ) : (
+            <div className="absolute w-screen h-screen bg-black z-[-10]"></div>
+          )}
+
           <div className="flex justify-center items-center gap-10 flex-col md:flex-row">
             <Project imagepath="/chess.png"></Project>
             <Project imagepath="/codetype.png"></Project>
-            <Project imagepath="/quickflip.jpg"></Project>
+            <Project imagepath="/quickflip2.jpg"></Project>
           </div>
         </div>
       </div>
