@@ -21,6 +21,7 @@ export default function Tsparticles() {
     },
     []
   );
+
   return (
     <Particles
       id="tsparticles"

@@ -6,7 +6,6 @@ import { OrbitControls } from "@react-three/drei";
 import React, { useEffect, useRef, useState } from "react";
 import FBOCurl from "./FBOCurl";
 import Reveal from "./Reveal";
-import Link from "next/link";
 import Image from "next/image";
 import Tsparticles from "./Tsparticles";
 import Project from "./Project";
@@ -30,7 +29,7 @@ export default function Home() {
 
     // Clean up the event listener when the component unmounts
     return () => {
-      window.addEventListener("wheel", (event) => {
+      window.removeEventListener("wheel", (event) => {
         if (event.deltaY > 0) {
           setprojectActive(true);
         } else {
@@ -49,8 +48,10 @@ export default function Home() {
     setprojectActive(!projectActive);
   };
 
+  console.log(aboutActive);
+
   return (
-    <>
+    <div className="w-full h-full bg-black">
       {/*NavBar  */}
       <div className="fixed flex justify-center w-screen items-center cursor-pointer text-[1rem] md:text-[2.2rem] z-50 top-5">
         <Reveal delay={0.5} inView={false}>
@@ -97,7 +98,7 @@ export default function Home() {
                   Travis Boyd.
                 </div>
               </div>
-              <div className="text-xl font-bold text-gray-400">
+              <div className="text-md md:text-xl font-bold text-gray-400 max-w-xl">
                 I&apos;m a 19 year old sophomore at Oakland University, deeply
                 engrossed in the world of computer science. My insatiable
                 curiosity has led me to explore the captivating domains of web
@@ -141,29 +142,34 @@ export default function Home() {
               </Reveal>
             </div>
           </div>
+          <Reveal delay={0.5} inView={false}>
+            <span className="absolute top-3/4 text-6xl z-50 text-white animate-bounce">
+              &#8681;
+            </span>
+          </Reveal>
         </div>
 
         <div className={styles.parallaxLayerBase}>
           <h1
             ref={projectSection}
-            className="text-white text-3xl md:text-6xl font-mono p-16 md:p-32"
+            className="text-white text-3xl md:text-6xl font-mono p-16 invisible md:visible md:p-32"
           >
             Projects
           </h1>
 
-          {projectActive ? (
+          {projectActive && !aboutActive ? (
             <Confetti />
           ) : (
             <div className="absolute w-screen h-screen bg-black z-[-10]"></div>
           )}
 
           <div className="flex justify-center items-center gap-10 flex-col md:flex-row">
-            <Project imagepath="/chess.png"></Project>
-            <Project imagepath="/codetype.png"></Project>
-            <Project imagepath="/quickflip2.jpg"></Project>
+            <Project route={"/chess"} imagepath="/chess.png"></Project>
+            <Project route={"/chess"} imagepath="/codetype.png"></Project>
+            <Project route={"/chess"} imagepath="/quickflip2.jpg"></Project>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

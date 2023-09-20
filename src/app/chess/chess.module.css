@@ -1,0 +1,13 @@
+.glow {
+  display: absolute;
+  width: fit;
+  height: fit;
+  background: transparent;
+  color: #b4b4b4;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.glow:hover {
+  color: white;
+}
