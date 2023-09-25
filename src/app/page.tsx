@@ -142,11 +142,6 @@ export default function Home() {
               </Reveal>
             </div>
           </div>
-          <Reveal delay={0.5} inView={false}>
-            <span className="absolute top-3/4 text-6xl z-50 text-white animate-bounce">
-              &#8681;
-            </span>
-          </Reveal>
         </div>
 
         <div className={styles.parallaxLayerBase}>
